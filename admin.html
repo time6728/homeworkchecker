@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/admin.css"> 
+    <script type="module" src="./js/admin.js"></script>
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="app-header">
+            <h1 class="header-title">Admin Dashboard</h1>
+            <a href="profile.html" class="back-link">← Go Back to Profile</a>
+        </header>
+
+        <main class="admin-main">
+            <h2 class="list-title">Teacher Accounts</h2>
+            <p class="instruction-text">Select an account to log in as that user.</p>
+            <div id="teacher-list-container" class="teacher-list-grid">
+                <p class="loading-text">Loading teacher data...</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

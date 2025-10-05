@@ -1,0 +1,138 @@
+/* --- Global & Reset Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #5b5ff8; /* A modern, friendly purple/blue */
+    --background-light: #eef3f8; /* Very light background */
+    --text-dark: #2c3e50;
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08); /* Soft shadow */
+    --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Header/Logout Button --- */
+.app-header {
+    background-color: white; /* Clean white header */
+    padding: 18px 40px;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0; 
+}
+
+.header-logo {
+    color: var(--primary-color);
+    font-size: 1.6em;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.logout-btn {
+    background-color: #f8f9fa; /* Lighter, less aggressive button */
+    color: #dc3545; 
+    border: 1px solid #dc3545;
+    padding: 8px 18px;
+    font-size: 1em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    font-weight: 500;
+}
+
+.logout-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* --- Centered Content Container --- */
+.main-screen {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    padding: 40px 20px;
+}
+
+/* --- Welcome Message Styling --- */
+.welcome-section {
+    text-align: center;
+    margin-bottom: 50px;
+    max-width: 700px;
+}
+
+.welcome-title {
+    color: var(--text-dark);
+    font-size: 2.8em;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.welcome-subtitle {
+    color: #7f8c8d; /* Muted gray for subtitle */
+    font-size: 1.1em;
+    font-weight: 300;
+}
+
+/* --- Navigation Grid (The Cards) --- */
+.nav-grid {
+    display: flex;
+    gap: 25px; 
+}
+
+/* --- Navigation Card Styling (The links) --- */
+.nav-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background-color: white;
+    padding: 30px 20px;
+    border-radius: 12px;
+    
+    /* Modern shadow effect */
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s ease;
+    
+    width: 240px; /* Slightly wider cards */
+    height: 180px; 
+    text-align: center;
+}
+
+.nav-card:hover {
+    /* Lift and deepen shadow */
+    transform: translateY(-5px); 
+    box-shadow: var(--shadow-hover);
+}
+
+.card-icon {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.card-description {
+    color: #95a5a6;
+    font-size: 0.85em;
+    font-weight: 400;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Student Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/student.css"> 
+    <script type="module" src="./js/student.js"></script>
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="app-header">
+            <h1 class="header-title">Student Management</h1>
+            <a href="index.html" class="back-link">← Go Back to Dashboard</a>
+        </header>
+
+        <main class="student-main">
+            <div class="input-grid">
+                <div class="input-card">
+                    <h2 class="card-title">Add Student Manually</h2>
+                    <div class="input-group">
+                        <label for="stdname">Student Name</label>
+                        <input type="text" id="stdname" placeholder="E.g., Alice Smith">
+                    </div>
+                    <div class="input-group">
+                        <label for="stdclass">Class Name</label>
+                        <input type="text" id="stdclass" placeholder="E.g., 10A Math">
+                    </div>
+                    <button id="stdaddbtn" class="action-btn primary-btn">Add Student</button>
+                </div>
+
+                <div class="input-card">
+                    <h2 class="card-title">Import from Google Sheet</h2>
+                    <div class="input-group">
+                        <label for="sheetlink">Google Sheet URL</label>
+                        <input type="text" id="sheetlink" placeholder="Paste full sheet URL here">
+                    </div>
+                    <button id="stdimpbtn" class="action-btn secondary-btn">Import Students</button>
+                </div>
+            </div>
+
+            <div class="student-list-section">
+                <h2 class="list-title">My Current Students (<span id="student-count">0</span>)</h2>
+                
+                <div class="bulk-actions-container hidden" id="bulk-actions">
+                    <button id="bulk-delete-btn" class="action-btn delete-btn-large">
+                        Delete Selected (<span id="selected-count">0</span>)
+                    </button>
+                </div>
+                <div id="stdlist" class="student-list-container">
+                    <p class="loading-text">Loading...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div id="edit-student-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 class="modal-title">Edit Student Details</h3>
+            <p id="edit-student-id" class="hidden"></p>
+            <div class="input-group">
+                <label for="modal-name-input">Name</label>
+                <input type="text" id="modal-name-input" required>
+            </div>
+            <div class="input-group">
+                <label for="modal-class-input">Class</label>
+                <input type="text" id="modal-class-input" required>
+            </div>
+            <div class="modal-actions">
+                <button id="modal-save-btn" class="action-btn primary-btn">Save Changes</button>
+                <button id="modal-cancel-btn" class="action-btn cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <div id="delete-confirmation-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 id="delete-modal-title" class="modal-title delete-title">Confirm Deletion</h3>
+            <p id="delete-modal-text" class="modal-instruction">
+                Are you sure you want to delete this student? This action cannot be undone.
+            </p>
+            <p id="delete-student-id" class="hidden"></p>
+            <div class="modal-actions">
+                <button id="delete-confirm-btn" class="action-btn delete-btn-large">Delete</button>
+                <button id="delete-cancel-btn" class="action-btn cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

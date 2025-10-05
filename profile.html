@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>User Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/profile.css">
+    <script type="module" src="./js/profile.js"></script>
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <header class="app-header">
+            <h1 class="header-title">My Profile</h1>
+            <a href="index.html" class="back-link">← Go Back to Dashboard</a>
+        </header>
+
+        <main class="profile-main">
+            <div id="profile-container" class="profile-card" aria-live="polite">
+                <p class="loading-text">Loading profile...</p>
+            </div>
+        </main>
+    </div>
+
+    <div id="edit-profile-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 class="modal-title">Edit Account Details</h3>
+            <div class="input-group">
+                <label for="modal-name-input">Name</label>
+                <input type="text" id="modal-name-input" required>
+            </div>
+            <div class="input-group">
+                <label for="modal-email-input">Email</label>
+                <input type="email" id="modal-email-input" required readonly class="readonly-input">
+            </div>
+            <div class="modal-actions">
+                <button id="modal-save-btn" class="action-btn primary-btn">Save Changes</button>
+                <button id="modal-cancel-btn" class="action-btn cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-action-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 id="admin-modal-title" class="modal-title">Admin Action</h3>
+            <p id="admin-modal-instruction" class="modal-instruction"></p>
+            <div class="input-group">
+                <label for="admin-modal-email-input">Email</label>
+                <input type="email" id="admin-modal-email-input" placeholder="teacher@school.edu" required>
+            </div>
+            <div class="modal-actions">
+                <button id="admin-modal-confirm-btn" class="action-btn primary-btn"></button>
+                <button id="admin-modal-close-btn" class="action-btn cancel-btn">Close</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

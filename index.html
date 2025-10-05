@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Teacher Portal</title> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/index.css"> 
+    <script type="module" src="./js/account.js"></script>
+</head>
+<body>
+    <header class="app-header">
+        <a href="#" class="header-logo">Portal</a>
+        <button id="logout" class="logout-btn">Logout</button>
+    </header>
+
+    <div class="main-screen">
+        <div class="welcome-section">
+            <h2 class="welcome-title">Welcome Back, Teacher!</h2> 
+            <p class="welcome-subtitle">Your personalized dashboard is ready. Quickly access your key areas below.</p>
+        </div>
+        
+        <div class="nav-grid">
+            <a href="homework.html" class="nav-card">
+                <span class="card-icon">📚</span>
+                <span class="card-title">Gradebook & Tasks</span>
+                <span class="card-description">Create, view, and grade assignments.</span>
+            </a>
+            
+            <a href="student.html" class="nav-card">
+                <span class="card-icon">🧑‍🎓</span>
+                <span class="card-title">Student Management</span>
+                <span class="card-description">View class lists and student records.</span>
+            </a>
+            
+            <a href="profile.html" class="nav-card">
+                <span class="card-icon">👤</span> 
+                <span class="card-title">My Profile</span>
+                <span class="card-description">Update information and manage account settings.</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

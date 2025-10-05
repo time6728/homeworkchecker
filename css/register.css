@@ -1,0 +1,114 @@
+/* --- Global & Reset Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #5b5ff8;
+    --background-light: #eef3f8;
+    --text-dark: #2c3e50;
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    /* Center the registration box on the screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- Registration Form Container --- */
+.register-container {
+    background-color: white;
+    padding: 40px 45px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    width: 100%;
+    max-width: 400px; /* Consistent size with login form */
+    text-align: center;
+}
+
+.register-title {
+    color: var(--primary-color);
+    font-size: 1.8em;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+/* --- Input Styling --- */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 500;
+    color: #7f8c8d;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #dcdfe4;
+    border-radius: 8px;
+    font-size: 1em;
+    font-family: inherit;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-group input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(91, 95, 248, 0.2); 
+    outline: none;
+}
+
+/* --- Register Button Styling --- */
+.register-btn {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 4px 10px rgba(91, 95, 248, 0.4);
+}
+
+.register-btn:hover {
+    background-color: #4a4edf;
+}
+
+.register-btn:active {
+    transform: translateY(1px);
+}
+
+/* --- Login Link --- */
+.login-text {
+    margin-top: 25px;
+    font-size: 0.95em;
+    color: #7f8c8d;
+}
+
+.login-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}

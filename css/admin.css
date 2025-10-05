@@ -1,0 +1,149 @@
+/* --- Global & Reset Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #5b5ff8; /* Modern purple/blue */
+    --secondary-color: #3498db; 
+    --background-light: #eef3f8;
+    --text-dark: #2c3e50;
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --hover-light: #f7f9fb;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Header/Navigation --- */
+.app-header {
+    background-color: white;
+    padding: 15px 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.back-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #4a4edf;
+}
+
+/* --- Main Layout --- */
+.admin-main {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.list-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.instruction-text {
+    color: #7f8c8d;
+    margin-bottom: 25px;
+}
+
+/* --- Teacher List Grid --- */
+.teacher-list-grid {
+    display: grid;
+    /* Responsive grid: 2 columns on desktop, 1 on small screens */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 20px;
+}
+
+.loading-text {
+    color: #7f8c8d;
+    font-style: italic;
+    grid-column: 1 / -1; /* Span across the whole grid */
+}
+
+/* --- Teacher Card Element --- */
+.teacher-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 15px;
+    transition: transform 0.2s;
+}
+
+.teacher-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.teacher-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.teacher-name {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.4;
+}
+
+.teacher-email {
+    font-size: 0.9em;
+    color: #7f8c8d;
+}
+
+.teacher-role {
+    font-size: 0.85em;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-top: 5px;
+}
+
+/* --- Login Button --- */
+.login-btn {
+    border: none;
+    padding: 10px 15px;
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 10px rgba(91, 95, 248, 0.3);
+    width: 100%; /* Full width button */
+}
+
+.login-btn:hover {
+    background-color: #4a4edf;
+}

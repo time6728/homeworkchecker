@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Homework Tracking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/tracking.css"> 
+    <script type="module" src="./js/tracking.js"></script>
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="app-header">
+            <h1 class="header-title">Homework Tracking</h1>
+            <a href="homework.html" class="back-link">← Go Back to Assignments</a>
+        </header>
+
+        <main class="tracking-main">
+            <div id="homework-context" class="context-card">
+                <p>Tracking: <span id="hw-name" class="context-value loading-placeholder">...</span></p>
+                <p>Class: <span id="hw-class" class="context-value loading-placeholder">...</span></p>
+            </div>
+
+            <div class="tracking-list-section">
+                <h2 class="list-title">
+                    Student Status 
+                    (<span id="status-summary">Loading...</span>)
+                </h2>
+                <div id="trackinglist" class="tracking-list-container">
+                    <p class="loading-text">Loading student list...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

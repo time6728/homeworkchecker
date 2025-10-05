@@ -1,0 +1,376 @@
+/* --- Global & Reset Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #5b5ff8; /* Modern purple/blue */
+    --secondary-color: #3498db; /* Blue for import */
+    --background-light: #eef3f8;
+    --text-dark: #2c3e50;
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --delete-color: #e74c3c;
+    --success-color: #2ecc71;
+    /* NEW: Checkbox vars for consistency */
+    --checkbox-border: #95a5a6;
+    --checkbox-checked: var(--primary-color);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Header/Navigation (Unchanged) --- */
+.app-header {
+    background-color: white;
+    padding: 15px 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.back-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #4a4edf;
+}
+
+/* --- Main Layout (Unchanged) --- */
+.student-main {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* --- Input Cards (Unchanged) --- */
+.input-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+}
+
+.card-title {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 500;
+    color: #7f8c8d;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #dcdfe4;
+    border-radius: 6px;
+    font-size: 1em;
+    font-family: inherit;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-group input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(91, 95, 248, 0.2); 
+    outline: none;
+}
+
+/* --- Action Buttons (Shared Style - Unchanged) --- */
+.action-btn {
+    width: 100%;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease, opacity 0.3s;
+    margin-top: 10px;
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 10px rgba(91, 95, 248, 0.3);
+}
+
+.primary-btn:hover {
+    background-color: #4a4edf;
+}
+
+.secondary-btn {
+    background-color: var(--secondary-color);
+    color: white;
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+}
+
+.secondary-btn:hover {
+    background-color: #2980b9;
+}
+
+
+/* --- Student List --- */
+.student-list-section {
+    margin-top: 40px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+}
+
+.list-title {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f4f4f4;
+    padding-bottom: 10px;
+}
+
+#student-count {
+    color: var(--primary-color);
+}
+
+.student-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.student-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+    border-radius: 6px;
+    background-color: #f7f9fb;
+    transition: background-color 0.2s;
+}
+
+.student-row:hover {
+    background-color: #eff2f6;
+}
+
+.student-details {
+    flex-grow: 1;
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.student-name {
+    color: var(--text-dark);
+    margin-right: 15px;
+}
+
+.student-class {
+    color: #7f8c8d;
+    font-weight: 400;
+    font-size: 0.9em;
+}
+
+.row-actions button {
+    margin-left: 10px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.edit-btn {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #2980b9;
+}
+
+.delete-btn {
+    background-color: var(--delete-color);
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+/* --- NEW: Checkbox Styles (Copied from homework.css for consistency) --- */
+.homework-checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 20px; 
+    flex-shrink: 0; 
+}
+
+.homework-checkbox {
+    /* Hide default checkbox */
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+/* Custom Checkbox Styling (Bigger size) */
+.custom-checkbox {
+    height: 28px;  
+    width: 28px;  
+    background-color: #eee;
+    border: 2px solid var(--checkbox-border);
+    border-radius: 6px;  
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;  
+    transition: all 0.2s ease-in-out;
+}
+
+/* Style the checkmark */
+.custom-checkbox::after {
+    content: '';
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 2px;
+    width: 7px;  
+    height: 14px;  
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.homework-checkbox:checked + .custom-checkbox {
+    background-color: var(--checkbox-checked);
+    border-color: var(--checkbox-checked);
+}
+
+.homework-checkbox:checked + .custom-checkbox::after {
+    display: block;
+}
+
+.homework-checkbox:focus + .custom-checkbox {
+    box-shadow: 0 0 0 3px rgba(91, 95, 248, 0.4);
+}
+
+/* NEW: Bulk Actions UI */
+.bulk-actions-container {
+    padding: 15px;
+    background-color: #ffeaea;  
+    border: 1px solid var(--delete-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+}
+
+.bulk-actions-container .action-btn {
+    width: auto;  
+    margin-top: 0;
+}
+
+.delete-btn-large {
+    background-color: var(--delete-color);
+    color: white;
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+}
+
+.delete-btn-large:hover {
+    background-color: #c0392b;
+}
+.delete-title {
+    color: var(--delete-color); 
+}
+
+/* --- MODAL STYLES (Unchanged) --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 400px;
+}
+
+.modal-title {
+    font-size: 1.5em;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.cancel-btn {
+    background-color: #bdc3c7;
+    color: var(--text-dark);
+}
+
+.cancel-btn:hover {
+    background-color: #95a5a6;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-actions .action-btn {
+    width: auto;
+}
