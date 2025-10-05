@@ -4,6 +4,7 @@ import {
     updateDoc,
     collection,
     getDocs,
+    getDoc,
     query,
     where,
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
@@ -11,6 +12,7 @@ import { db } from "./firebase.js";
 
 const teacherId = localStorage.getItem("teacherId");
 const container = document.getElementById("profile-container");
+const originRole = await getRole();
 
 // --- Modal Elements for Editing Profile ---
 const editModal = document.getElementById("edit-profile-modal");
@@ -59,7 +61,7 @@ function handleProfileSnapshot(docSnap) {
     currentProfile = {
         name: data.name || "Unknown",
         email: data.email || "unknown@domain.com",
-        role: data.role || "teacher",
+        role: data.role || "user",
     };
     renderProfile(currentProfile);
 }
@@ -80,7 +82,7 @@ function renderProfile({ name, email, role }) {
     container.append(nameEl, emailEl, roleEl, editBtn);
     
     // Admin Actions Section
-    if (role.toLowerCase() === "admin") {
+    if (originRole === "admin") {
         const adminActionsDiv = document.createElement("div");
         adminActionsDiv.className = "admin-actions";
         
@@ -183,6 +185,22 @@ function showAdminActionModal(action) {
         adminModalConfirmBtn.className = "action-btn delete-btn";
         adminModalConfirmBtn.onclick = handleRevokeAdmin;
     }
+}
+
+async function getRole() {
+  const originId = localStorage.getItem("originalTeacherId");
+  if (!originId) return console.error("Missing originalTeacherId in localStorage"), null;
+  try {
+    const docSnap = await getDoc(doc(db, "teachers", originId));
+    if (!docSnap.exists()) {
+      console.warn(`Teacher not found: ${originId}`);
+      return "user";
+    }
+    return docSnap.data().role;
+  } catch (err) {
+    console.error("Failed to fetch role:", err);
+    return "error";
+  }
 }
 
 async function handlePromoteAdmin() {

@@ -18,6 +18,7 @@ async function registerUser(name, email, password) {
     const user = userCredential.user;
     await setDoc(doc(db, "teachers", user.uid), { name, email, role: "user"});
     localStorage.setItem("teacherId", user.uid);
+    localStorage.setItem("originalTeacherId", user.uid);
     console.log("Register successfully!");
     window.location.href = "index.html";
   } catch (e) {
@@ -31,6 +32,7 @@ async function loginUser(email, password) {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
     localStorage.setItem("teacherId", user.uid);
+    localStorage.setItem("originalTeacherId", user.uid);
     console.log("Login successful!");
     window.location.href = "index.html";
   } catch (e) {
