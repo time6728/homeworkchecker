@@ -31,6 +31,7 @@ body {
     background-color: white;
     padding: 15px 40px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    /* Default desktop layout */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -76,7 +77,7 @@ body {
 /* --- Teacher List Grid --- */
 .teacher-list-grid {
     display: grid;
-    /* Responsive grid: 2 columns on desktop, 1 on small screens */
+    /* Default grid: auto-fill columns, minimum size 300px */
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
     gap: 20px;
 }
@@ -146,4 +147,50 @@ body {
 
 .login-btn:hover {
     background-color: #4a4edf;
+}
+
+
+/* -------------------------- */
+/* --- Mobile Responsiveness --- */
+/* -------------------------- */
+@media (max-width: 700px) {
+    /* 1. Header Centering */
+    .app-header {
+        /* Stack the title and link vertically and center them */
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 20px; /* Reduced side padding */
+        gap: 5px; /* Space between title and link */
+    }
+
+    .header-title {
+        font-size: 1.4em; /* Slightly smaller title for mobile */
+    }
+
+    /* 2. Main Layout */
+    .admin-main {
+        margin: 20px auto; /* Reduced vertical margin */
+        padding: 0 15px; /* Reduced side padding to give cards more space */
+    }
+
+    /* 3. Teacher List Grid: Force Single Column */
+    .teacher-list-grid {
+        /* Force a single column layout on smaller screens */
+        grid-template-columns: 1fr; 
+        gap: 15px; /* Slightly reduced gap between cards */
+    }
+
+    /* 4. Card Styling */
+    .teacher-card {
+        padding: 15px; /* Slightly reduced padding */
+    }
+
+    .teacher-name {
+        font-size: 1.1em;
+    }
+
+    /* 5. Login Button */
+    .login-btn {
+        padding: 12px 15px; /* Taller button for easier tapping */
+    }
 }

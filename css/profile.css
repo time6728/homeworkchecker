@@ -95,14 +95,21 @@ body {
     margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid #eef3f8;
+    /* ADDED: Use flex to control button layout */
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 10px; /* Space between buttons */
 }
 
+/* Modified to remove margin-right which interferes with flex gap */
 .admin-actions .action-btn {
     width: auto;
-    margin-right: 10px;
+    margin-right: 0; /* Removed this */
     margin-top: 0;
     padding: 10px 18px;
     font-size: 0.95em;
+    flex-grow: 1; /* Allow buttons to grow */
+    min-width: 150px; /* Minimum width for readability */
 }
 
 /* --- Action Buttons (Shared Style) --- */
@@ -114,7 +121,9 @@ body {
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.1s ease, opacity 0.3s;
-    margin-top: 10px;
+    /* MODIFIED: Changed default button to take full width */
+    width: 100%; 
+    margin-top: 15px; /* Increased margin for stacking */
 }
 
 .primary-btn {
@@ -145,6 +154,17 @@ body {
 
 .secondary-btn:hover {
     background-color: #2980b9;
+}
+
+/* Added style for delete button as defined in JS */
+.delete-btn {
+    background-color: var(--delete-color);
+    color: white;
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
 }
 
 .cancel-btn {
@@ -224,6 +244,13 @@ body {
     gap: 10px;
 }
 
+/* MODIFIED: Make modal buttons stack on mobile */
+.modal-actions .action-btn {
+    width: auto;
+    flex-grow: 1; /* Allow buttons to stretch */
+    min-width: 120px;
+}
+
 .modal-instruction {
     text-align: center;
     color: #7f8c8d;
@@ -244,4 +271,74 @@ body {
     border-color: #dcdfe4; /* Use the default border color */
     box-shadow: none; 
     outline: none;
+}
+
+/* -------------------------- */
+/* --- Mobile Responsiveness --- */
+/* -------------------------- */
+@media (max-width: 600px) {
+    
+    /* 1. Header Adjustment */
+    .app-header {
+        padding: 15px 20px; /* Reduced side padding */
+        flex-direction: column; /* Stack title and back link */
+        gap: 10px;
+    }
+    
+    .header-title {
+        font-size: 1.4em;
+    }
+
+    /* 2. Main Layout Adjustment */
+    .profile-main {
+        margin: 30px auto; /* Reduced vertical margin */
+        padding: 0 15px; /* Reduced side padding */
+    }
+
+    /* 3. Profile Card Adjustment */
+    .profile-card {
+        padding: 25px; /* Reduced card padding */
+    }
+
+    .profile-detail {
+        font-size: 1em; /* Slightly smaller detail font */
+    }
+    
+    .detail-label {
+        min-width: 60px; /* Reduced minimum width for label */
+    }
+
+    /* 4. Default Action Button (Edit Profile Button) */
+    .action-btn {
+        padding: 10px 15px; /* Smaller padding for main buttons */
+        font-size: 0.95em;
+    }
+
+    /* 5. Admin Actions (Button Group) */
+    .admin-actions {
+        flex-direction: column; /* Force buttons to stack in a column */
+        gap: 10px; /* Space between stacked buttons */
+        padding-top: 15px;
+    }
+    
+    /* Make stacked admin buttons full width */
+    .admin-actions .action-btn {
+        width: 100%;
+        min-width: auto;
+    }
+
+    /* 6. Modal Actions */
+    .modal-actions {
+        flex-direction: column; /* Stack modal buttons */
+        gap: 10px;
+    }
+
+    .modal-actions .action-btn {
+        width: 100%; /* Make modal buttons full width */
+        min-width: auto;
+    }
+
+    .modal-content {
+        padding: 20px; /* Reduced modal padding */
+    }
 }

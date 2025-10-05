@@ -84,6 +84,7 @@ body {
     margin-bottom: 15px;
 }
 
+/* Key Change: Default to grid for desktop */
 .input-grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -165,6 +166,7 @@ body {
 
 /* --- Homework Row Styles --- */
 .homework-row {
+    /* Set for desktop */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -173,6 +175,8 @@ body {
     background-color: #f7f9fb;
     border-left: 5px solid var(--primary-color);
     transition: background-color 0.2s;
+    /* ADDED: Allow wrapping for small screens */
+    flex-wrap: wrap; 
 }
 
 .homework-row.due-soon {
@@ -186,7 +190,8 @@ body {
 /* Flexbox Alignment for Checkbox and Text Block */
 .homework-details {
     flex-grow: 1;
-    /* REMOVED: display: flex; and align-items: center; as checkbox is now outside */
+    /* Added flex basis for better wrapping */
+    flex: 1 1 50%;
 }
 
 /* The label for the custom checkbox */
@@ -264,8 +269,15 @@ body {
     margin-top: 4px;
 }
 
+.row-actions {
+    /* Ensure action buttons wrap together */
+    display: flex;
+    gap: 5px; /* Use flex gap instead of margin-left */
+    flex-shrink: 0;
+}
+
 .row-actions button {
-    margin-left: 10px;
+    margin-left: 0; /* Override old margin-left */
     padding: 8px 15px;
     border: none;
     border-radius: 4px;
@@ -382,4 +394,92 @@ body {
 
 .modal-actions .action-btn {
     width: auto;
+}
+
+/* -------------------------- */
+/* --- Mobile Responsiveness --- */
+/* -------------------------- */
+@media (max-width: 650px) {
+    /* 1. Header Adjustment */
+    .app-header {
+        padding: 15px 20px; /* Reduced side padding */
+        flex-direction: column; /* Stack title and back link */
+        gap: 10px;
+    }
+    
+    .header-title {
+        font-size: 1.4em;
+    }
+
+    /* 2. Main Layout Adjustment */
+    .homework-main {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+
+    /* 3. Input Grid (Make form fields stack) */
+    .input-card {
+        padding: 25px;
+    }
+
+    .input-grid-2 {
+        /* Force the Name and Class inputs to stack vertically */
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    /* 4. Homework List Item Adjustment */
+    .homework-list-section {
+        padding: 20px;
+    }
+
+    .homework-row {
+        /* Force details onto one line, and actions onto the next */
+        flex-direction: column; 
+        align-items: flex-start;
+        padding: 15px;
+        /* Increase vertical padding */
+    }
+
+    .homework-checkbox-label {
+        /* Keep checkbox and details on the same line visually */
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    /* Adjust the main details container to flow better */
+    .homework-details {
+        /* Take full width when stacked */
+        width: 100%; 
+        flex: 1 1 100%; /* Take full width */
+        margin-left: 38px; /* Offset to align with text next to checkbox */
+        margin-top: -38px; /* Pull up to align with checkbox */
+    }
+    
+    .homework-name {
+        font-size: 1.1em;
+    }
+
+    .row-actions {
+        /* Take full width and justify to the right */
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 10px; /* Add space above buttons */
+    }
+
+    /* Reduce button sizes on mobile to fit three actions */
+    .row-actions button {
+        padding: 8px 10px; 
+        font-size: 0.9em;
+    }
+
+    /* 5. Modal Actions */
+    .modal-actions {
+        flex-direction: column; /* Stack modal buttons */
+        gap: 10px;
+    }
+
+    .modal-actions .action-btn {
+        width: 100%; /* Make modal buttons full width */
+    }
 }

@@ -30,7 +30,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- Header/Navigation (Unchanged) --- */
+/* --- Header/Navigation --- */
 .app-header {
     background-color: white;
     padding: 15px 40px;
@@ -57,7 +57,7 @@ body {
     color: #4a4edf;
 }
 
-/* --- Main Layout (Unchanged) --- */
+/* --- Main Layout --- */
 .student-main {
     max-width: 1200px;
     margin: 30px auto;
@@ -65,14 +65,16 @@ body {
     width: 100%;
 }
 
+/* KEY CHANGE: Input grid is the first thing that needs to stack */
 .input-grid {
+    /* Retained for desktop/tablet default */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     margin-bottom: 40px;
 }
 
-/* --- Input Cards (Unchanged) --- */
+/* --- Input Cards --- */
 .input-card {
     background-color: white;
     padding: 30px;
@@ -114,7 +116,7 @@ body {
     outline: none;
 }
 
-/* --- Action Buttons (Shared Style - Unchanged) --- */
+/* --- Action Buttons (Shared Style) --- */
 .action-btn {
     width: 100%;
     border: none;
@@ -176,6 +178,7 @@ body {
     gap: 10px;
 }
 
+/* KEY CHANGE: Make student rows more mobile-friendly */
 .student-row {
     display: flex;
     justify-content: space-between;
@@ -184,6 +187,8 @@ body {
     border-radius: 6px;
     background-color: #f7f9fb;
     transition: background-color 0.2s;
+    /* ADDED: Allow wrapping for small screens */
+    flex-wrap: wrap; 
 }
 
 .student-row:hover {
@@ -191,24 +196,38 @@ body {
 }
 
 .student-details {
-    flex-grow: 1;
+    /* Allow details to take the necessary space */
+    flex: 1 1 50%; 
     font-size: 1em;
     font-weight: 500;
+    /* Added margin for mobile wrap */
+    margin-right: 15px; 
 }
 
 .student-name {
     color: var(--text-dark);
     margin-right: 15px;
+    /* Ensure the name wraps nicely */
+    display: block; 
 }
 
 .student-class {
     color: #7f8c8d;
     font-weight: 400;
     font-size: 0.9em;
+    /* Ensure class details are block or separate line on small screens */
+    display: block;
+}
+
+.row-actions {
+    /* Ensure action buttons wrap together */
+    display: flex;
+    gap: 5px; 
+    flex-shrink: 0;
 }
 
 .row-actions button {
-    margin-left: 10px;
+    margin-left: 0; /* Use flex gap instead of margin */
     padding: 8px 15px;
     border: none;
     border-radius: 4px;
@@ -235,7 +254,7 @@ body {
     background-color: #c0392b;
 }
 
-/* --- NEW: Checkbox Styles (Copied from homework.css for consistency) --- */
+/* --- NEW: Checkbox Styles (Unchanged) --- */
 .homework-checkbox-label {
     display: flex;
     align-items: center;
@@ -243,7 +262,7 @@ body {
     margin-right: 20px; 
     flex-shrink: 0; 
 }
-
+/* ... (rest of checkbox styles unchanged) ... */
 .homework-checkbox {
     /* Hide default checkbox */
     position: absolute;
@@ -292,7 +311,7 @@ body {
     box-shadow: 0 0 0 3px rgba(91, 95, 248, 0.4);
 }
 
-/* NEW: Bulk Actions UI */
+/* NEW: Bulk Actions UI (Unchanged) */
 .bulk-actions-container {
     padding: 15px;
     background-color: #ffeaea;  
@@ -322,7 +341,7 @@ body {
     color: var(--delete-color); 
 }
 
-/* --- MODAL STYLES (Unchanged) --- */
+/* --- MODAL STYLES --- */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -373,4 +392,97 @@ body {
 
 .modal-actions .action-btn {
     width: auto;
+}
+
+/* -------------------------- */
+/* --- Mobile Responsiveness --- */
+/* -------------------------- */
+@media (max-width: 650px) {
+    /* 1. Header Adjustment */
+    .app-header {
+        padding: 15px 20px; /* Reduced side padding */
+        flex-direction: column; /* Stack title and back link */
+        gap: 10px;
+    }
+    
+    .header-title {
+        font-size: 1.4em;
+    }
+
+    /* 2. Main Layout Adjustment */
+    .student-main {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+
+    /* 3. Input Grid (Make cards stack) */
+    .input-grid {
+        /* This is the key change: grid layout effectively becomes a column */
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .input-card {
+        padding: 25px;
+    }
+
+    /* 4. Student List Item Adjustment */
+    .student-list-section {
+        padding: 20px;
+    }
+
+    .student-row {
+        /* Force details onto one line, and actions onto the next */
+        flex-direction: column; 
+        align-items: flex-start;
+        padding: 15px; /* Increase vertical padding */
+    }
+
+    .homework-checkbox-label {
+        /* Keep checkbox and details on the same line visually */
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    /* Adjust the main details container to flow better */
+    .student-details {
+        /* Take full width when stacked */
+        width: 100%; 
+        margin-left: 38px; /* Offset to align with text next to checkbox */
+        margin-top: -38px; /* Pull up to align with checkbox */
+        margin-bottom: 10px;
+    }
+
+    /* Revert details to inline flow for small screens */
+    .student-name,
+    .student-class {
+        display: inline;
+    }
+    
+    .student-name {
+        margin-right: 5px;
+        font-size: 1.1em;
+    }
+
+    .student-class {
+        font-size: 0.9em;
+    }
+
+    .row-actions {
+        /* Take full width and justify to the right */
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 0;
+    }
+
+    /* 5. Modal Actions */
+    .modal-actions {
+        flex-direction: column; /* Stack modal buttons */
+        gap: 10px;
+    }
+
+    .modal-actions .action-btn {
+        width: 100%; /* Make modal buttons full width */
+    }
+    
 }

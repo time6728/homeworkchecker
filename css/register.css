@@ -21,12 +21,13 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    padding: 20px; /* Added slight padding to the body for mobile safety */
 }
 
 /* --- Registration Form Container --- */
 .register-container {
     background-color: white;
-    padding: 40px 45px;
+    padding: 40px 45px; /* Default desktop padding */
     border-radius: 12px;
     box-shadow: var(--shadow-soft);
     width: 100%;
@@ -111,4 +112,35 @@ body {
 
 .login-link:hover {
     text-decoration: underline;
+}
+
+/* -------------------------- */
+/* --- Mobile Responsiveness --- */
+/* -------------------------- */
+@media (max-width: 450px) {
+    
+    /* 1. Adjust body alignment for scrollability on short screens */
+    body {
+        align-items: flex-start; /* Prevents content being cut off on short screens */
+        padding: 40px 20px; 
+    }
+    
+    /* 2. Reduce container padding on small screens */
+    .register-container {
+        padding: 30px 25px; 
+        /* Optional: Remove the box-shadow on very small screens to simplify */
+        box-shadow: none; 
+    }
+    
+    /* 3. Adjust title size */
+    .register-title {
+        font-size: 1.6em;
+        margin-bottom: 25px;
+    }
+
+    /* 4. Adjust button size for better tap target */
+    .register-btn {
+        padding: 14px 20px; 
+        font-size: 1em;
+    }
 }

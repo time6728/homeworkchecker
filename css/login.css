@@ -21,12 +21,13 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    padding: 20px; /* Added slight padding to the body for mobile safety */
 }
 
 /* --- Login Form Container --- */
 .login-container {
     background-color: white;
-    padding: 40px 45px;
+    padding: 40px 45px; /* Default desktop padding */
     border-radius: 12px;
     box-shadow: var(--shadow-soft);
     width: 100%;
@@ -112,4 +113,37 @@ body {
 
 .register-link:hover {
     text-decoration: underline;
+}
+
+/* -------------------------- */
+/* --- Mobile Responsiveness --- */
+/* -------------------------- */
+@media (max-width: 450px) {
+    /* 1. Reduce container padding on small screens */
+    .login-container {
+        /* Reduced padding for tighter fit on small phones */
+        padding: 30px 25px; 
+        /* Remove the box-shadow on very small screens to simplify the look */
+        box-shadow: none; 
+    }
+    
+    /* 2. Adjust body alignment if screen is short (e.g., landscape mobile) */
+    body {
+        /* Allow content to scroll naturally if the form is taller than the viewport */
+        align-items: flex-start; 
+        /* Ensure there's space at the top and bottom */
+        padding: 40px 20px; 
+    }
+
+    /* 3. Adjust title size */
+    .login-title {
+        font-size: 1.6em;
+        margin-bottom: 25px;
+    }
+
+    /* 4. Adjust button size for better tap target */
+    .login-btn {
+        padding: 14px 20px; /* Slightly taller button */
+        font-size: 1em;
+    }
 }

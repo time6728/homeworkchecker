@@ -89,12 +89,14 @@ body {
 
 /* --- Navigation Grid (The Cards) --- */
 .nav-grid {
+    /* Default: Row (Flex) layout for desktop */
     display: flex;
     gap: 25px; 
 }
 
 /* --- Navigation Card Styling (The links) --- */
 .nav-card {
+    /* Default: Column layout inside the card for desktop */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -108,7 +110,7 @@ body {
     box-shadow: var(--shadow-soft);
     transition: all 0.3s ease;
     
-    width: 240px; /* Slightly wider cards */
+    width: 240px; /* Default desktop width */
     height: 180px; 
     text-align: center;
 }
@@ -135,4 +137,75 @@ body {
     color: #95a5a6;
     font-size: 0.85em;
     font-weight: 400;
+}
+
+/* -------------------------- */
+/* --- Mobile Responsiveness --- */
+/* -------------------------- */
+@media (max-width: 768px) {
+    
+    /* 1. Header Adjustment */
+    .app-header {
+        padding: 15px 20px; 
+    }
+    
+    /* 2. Main Layout Adjustment */
+    .main-screen {
+        justify-content: flex-start;
+        padding-top: 20px; 
+        padding-bottom: 20px;
+    }
+
+    .welcome-section {
+        margin-bottom: 30px; 
+    }
+
+    .welcome-title {
+        font-size: 2em; 
+    }
+
+    /* 3. Navigation Grid (Stacked Cards) */
+    .nav-grid {
+        /* Change from row to column layout */
+        flex-direction: column;
+        align-items: center; 
+        width: 100%; 
+        gap: 15px; 
+    }
+
+    /* 4. Navigation Card Internal Layout (Change to COLUMN layout for mobile) */
+    .nav-card {
+        /* *** KEY CHANGE: Force to column on mobile *** */
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center; /* Center all contents horizontally */
+        
+        width: 90%; 
+        max-width: 400px; 
+        height: auto; 
+        
+        padding: 20px 20px; /* Adjust padding for column stacking */
+        text-align: center; /* Center the text */
+    }
+    
+    .card-icon {
+        font-size: 2.2em; /* Slightly smaller icon than desktop */
+        margin-bottom: 10px;
+        margin-right: 0; /* Remove margin-right from previous mobile setting */
+    }
+    
+    /* Reset styles that forced text into a column next to the icon */
+    .nav-card > :nth-child(2) { 
+        display: block; /* Revert to default display */
+        text-align: center; 
+    }
+
+    .card-title {
+        margin-bottom: 5px;
+        font-size: 1.1em; 
+    }
+    
+    .card-description {
+        display: block; 
+    }
 }
