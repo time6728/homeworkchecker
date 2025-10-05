@@ -76,12 +76,10 @@ function createTeacherElement(teacher) {
 }
 
 function handleLogin(teacherId, teacherName) {
-    const currentAdminId = localStorage.getItem("teacherId");
-    if (currentAdminId) {
-        localStorage.setItem("originalAdminId", currentAdminId); 
-    }
+    // Overwrite the current teacher ID
     localStorage.setItem("teacherId", teacherId);
     console.log(`Admin action: Logged in as ${teacherName} (${teacherId})`);
+    // Redirect to the main dashboard
     window.location.href = "index.html";
 }
 
@@ -90,5 +88,4 @@ function showError(container, err) {
     container.innerHTML = `<p class="loading-text" style="color:var(--delete-color);">
         Failed to load teachers: ${err.message || 'Check console for details.'}
     </p>`;
-
 }

@@ -67,56 +67,31 @@ function handleProfileSnapshot(docSnap) {
 function renderProfile({ name, email, role }) {
     container.innerHTML = ""; // Clear loading text
     
-    const originalAdminId = localStorage.getItem("originalAdminId");
-    const isAdmin = (role.toLowerCase() === "admin") || !!originalAdminId;
-    
+    // Name
     const nameEl = createElement("div", `<span class="detail-label">Name:</span> <span class="detail-value">${name}</span>`, "profile-detail");
+    // Email
     const emailEl = createElement("div", `<span class="detail-label">Email:</span> <span class="detail-value">${email}</span>`, "profile-detail");
+    // Role
     const roleEl = createElement("div", `<span class="detail-label">Role:</span> <span class="detail-value">${role.toUpperCase()}</span>`, "profile-detail");
     
+    // Edit Button
     const editBtn = createButton("Edit Profile", () => showEditModal(name, email), "primary-btn");
+
     container.append(nameEl, emailEl, roleEl, editBtn);
-    if (isAdmin) {
+    
+    // Admin Actions Section
+    if (role.toLowerCase() === "admin") {
         const adminActionsDiv = document.createElement("div");
         adminActionsDiv.className = "admin-actions";
-        const adminBtn = createButton("Go to Admin Page", goToAdminPage, "admin-link-btn");
-        adminActionsDiv.append(adminBtn);
-        if (role.toLowerCase() === "admin") {
-             const addAdminBtn = createButton("Promote Teacher", () => showAdminActionModal("promote"), "secondary-btn");
-             const revokeAdminBtn = createButton("Revoke Admin", () => showAdminActionModal("revoke"), "delete-btn");
-             adminActionsDiv.append(addAdminBtn, revokeAdminBtn);
-        }
-        if (originalAdminId) {
-            const returnBtn = createButton("Return to Admin", returnToAdmin, "primary-btn");
-            adminActionsDiv.append(returnBtn);
-        }
+        
+        const adminBtn = createButton("Go to Admin Page", goToAdminPage, "admin-link-btn"); 
+        
+        const addAdminBtn = createButton("Promote Teacher", () => showAdminActionModal("promote"), "secondary-btn");
+        
+        const revokeAdminBtn = createButton("Revoke Admin", () => showAdminActionModal("revoke"), "delete-btn");
+        
+        adminActionsDiv.append(adminBtn, addAdminBtn, revokeAdminBtn);
         container.append(adminActionsDiv);
-    }
-}
-
-async function returnToAdmin() {
-    const originalAdminId = localStorage.getItem("originalAdminId");
-    if (!originalAdminId) return;
-
-    try {
-        const adminRef = doc(db, "teachers", originalAdminId);
-        const adminDoc = await getDoc(adminRef);
-
-        if (adminDoc.exists() && adminDoc.data().role === "admin") {
-            localStorage.setItem("teacherId", originalAdminId);
-            localStorage.removeItem("originalAdminId");
-            console.log("Returned to original admin account.");
-            window.location.href = "admin.html";
-        } else {
-            localStorage.removeItem("originalAdminId");
-            localStorage.removeItem("teacherId");
-            console.error("Original admin rights revoked. Logging out.");
-            window.location.href = "login.html"; 
-        }
-    } catch (err) {
-        console.error("Error during admin return check:", err);
-        localStorage.removeItem("originalAdminId");
-        window.location.href = "login.html"; 
     }
 }
 
@@ -263,4 +238,3 @@ async function findTeacherByEmail(email) {
     const snapshot = await getDocs(q);
     return snapshot.empty ? null : snapshot.docs[0];
 }
-
