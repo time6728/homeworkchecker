@@ -9,9 +9,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 import { db } from "./firebase.js";
 
+let originRole = null;
+
 const teacherId = localStorage.getItem("teacherId");
 const container = document.getElementById("profile-container");
-const originRole = null;
 
 // --- Modal Elements for Editing Profile ---
 const editModal = document.getElementById("edit-profile-modal");
@@ -260,5 +261,4 @@ async function findTeacherByEmail(email) {
     const q = query(teachersRef, where("email", "==", email));
     const snapshot = await getDocs(q);
     return snapshot.empty ? null : snapshot.docs[0];
-
 }
