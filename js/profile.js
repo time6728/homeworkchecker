@@ -4,7 +4,6 @@ import {
     updateDoc,
     collection,
     getDocs,
-    getDoc,
     query,
     where,
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
@@ -12,7 +11,7 @@ import { db } from "./firebase.js";
 
 const teacherId = localStorage.getItem("teacherId");
 const container = document.getElementById("profile-container");
-const originRole = await getRole();
+const originRole = null;
 
 // --- Modal Elements for Editing Profile ---
 const editModal = document.getElementById("edit-profile-modal");
@@ -48,8 +47,30 @@ function initProfilePage() {
 }
 
 function loadTeacherProfile(teacherId) {
-    const teacherRef = doc(db, "teachers", teacherId);
-    onSnapshot(teacherRef, handleProfileSnapshot);
+  const originId = localStorage.getItem("originalTeacherId");
+  if (!teacherId) {
+    console.error("Missing teacherId");
+    return;
+  }
+  const teacherRef = doc(db, "teachers", teacherId);
+  onSnapshot(teacherRef, handleProfileSnapshot);
+  if (originId) {
+    const originTeacherRef = doc(db, "teachers", originId);
+    onSnapshot(originTeacherRef, updateAdmin);
+  } else {
+    console.warn("Missing originalTeacherId in localStorage");
+  }
+}
+
+function updateAdmin(docSnap) {
+  if (!docSnap.exists()) return;
+  const data = docSnap.data();
+  const newRole = data.role || "user";
+  if (originRole !== newRole) {
+    originRole = newRole;
+    console.log("Origin role updated:", originRole);
+    renderProfile(currentProfile);
+  }
 }
 
 function handleProfileSnapshot(docSnap) {
@@ -187,22 +208,6 @@ function showAdminActionModal(action) {
     }
 }
 
-async function getRole() {
-  const originId = localStorage.getItem("originalTeacherId");
-  if (!originId) return console.error("Missing originalTeacherId in localStorage"), null;
-  try {
-    const docSnap = await getDoc(doc(db, "teachers", originId));
-    if (!docSnap.exists()) {
-      console.warn(`Teacher not found: ${originId}`);
-      return "user";
-    }
-    return docSnap.data().role;
-  } catch (err) {
-    console.error("Failed to fetch role:", err);
-    return "error";
-  }
-}
-
 async function handlePromoteAdmin() {
     const targetEmail = adminModalEmailInput.value.trim();
     if (!targetEmail) return console.warn("No email entered.");
@@ -255,4 +260,5 @@ async function findTeacherByEmail(email) {
     const q = query(teachersRef, where("email", "==", email));
     const snapshot = await getDocs(q);
     return snapshot.empty ? null : snapshot.docs[0];
+
 }
