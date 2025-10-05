@@ -67,31 +67,40 @@ function handleProfileSnapshot(docSnap) {
 function renderProfile({ name, email, role }) {
     container.innerHTML = ""; // Clear loading text
     
-    // Name
+    const originalAdminId = localStorage.getItem("originalAdminId");
+    const isAdmin = (role.toLowerCase() === "admin") || !!originalAdminId;
+    
     const nameEl = createElement("div", `<span class="detail-label">Name:</span> <span class="detail-value">${name}</span>`, "profile-detail");
-    // Email
     const emailEl = createElement("div", `<span class="detail-label">Email:</span> <span class="detail-value">${email}</span>`, "profile-detail");
-    // Role
     const roleEl = createElement("div", `<span class="detail-label">Role:</span> <span class="detail-value">${role.toUpperCase()}</span>`, "profile-detail");
     
-    // Edit Button
     const editBtn = createButton("Edit Profile", () => showEditModal(name, email), "primary-btn");
-
     container.append(nameEl, emailEl, roleEl, editBtn);
-    
-    // Admin Actions Section
-    if (role.toLowerCase() === "admin") {
+    if (isAdmin) {
         const adminActionsDiv = document.createElement("div");
         adminActionsDiv.className = "admin-actions";
-        
-        const adminBtn = createButton("Go to Admin Page", goToAdminPage, "admin-link-btn"); 
-        
-        const addAdminBtn = createButton("Promote Teacher", () => showAdminActionModal("promote"), "secondary-btn");
-        
-        const revokeAdminBtn = createButton("Revoke Admin", () => showAdminActionModal("revoke"), "delete-btn");
-        
-        adminActionsDiv.append(adminBtn, addAdminBtn, revokeAdminBtn);
+        const adminBtn = createButton("Go to Admin Page", goToAdminPage, "admin-link-btn");
+        adminActionsDiv.append(adminBtn);
+        if (role.toLowerCase() === "admin") {
+             const addAdminBtn = createButton("Promote Teacher", () => showAdminActionModal("promote"), "secondary-btn");
+             const revokeAdminBtn = createButton("Revoke Admin", () => showAdminActionModal("revoke"), "delete-btn");
+             adminActionsDiv.append(addAdminBtn, revokeAdminBtn);
+        }
+        if (originalAdminId) {
+            const returnBtn = createButton("Return to Admin", returnToAdmin, "primary-btn");
+            adminActionsDiv.append(returnBtn);
+        }
         container.append(adminActionsDiv);
+    }
+}
+
+function returnToAdmin() {
+    const originalAdminId = localStorage.getItem("originalAdminId");
+    if (originalAdminId) {
+        localStorage.setItem("teacherId", originalAdminId); 
+        localStorage.removeItem("originalAdminId"); 
+        console.log("Returned to original admin account.");
+        window.location.href = "admin.html";
     }
 }
 
