@@ -94,13 +94,29 @@ function renderProfile({ name, email, role }) {
     }
 }
 
-function returnToAdmin() {
+async function returnToAdmin() {
     const originalAdminId = localStorage.getItem("originalAdminId");
-    if (originalAdminId) {
-        localStorage.setItem("teacherId", originalAdminId); 
-        localStorage.removeItem("originalAdminId"); 
-        console.log("Returned to original admin account.");
-        window.location.href = "admin.html";
+    if (!originalAdminId) return;
+
+    try {
+        const adminRef = doc(db, "teachers", originalAdminId);
+        const adminDoc = await getDoc(adminRef);
+
+        if (adminDoc.exists() && adminDoc.data().role === "admin") {
+            localStorage.setItem("teacherId", originalAdminId);
+            localStorage.removeItem("originalAdminId");
+            console.log("Returned to original admin account.");
+            window.location.href = "admin.html";
+        } else {
+            localStorage.removeItem("originalAdminId");
+            localStorage.removeItem("teacherId");
+            console.error("Original admin rights revoked. Logging out.");
+            window.location.href = "login.html"; 
+        }
+    } catch (err) {
+        console.error("Error during admin return check:", err);
+        localStorage.removeItem("originalAdminId");
+        window.location.href = "login.html"; 
     }
 }
 
@@ -247,3 +263,4 @@ async function findTeacherByEmail(email) {
     const snapshot = await getDocs(q);
     return snapshot.empty ? null : snapshot.docs[0];
 }
+
